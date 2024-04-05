@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "b3aeb3b8-a7a9-44e4-a100-79191ba14001",
+		"name": "FirstCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27571951",
+		"_collection_link": "https://www.postman.com/navigation-architect-21607884/workspace/accuweatherapitest/collection/27571951-b3aeb3b8-a7a9-44e4-a100-79191ba14001?action=share&source=collection_link&creator=27571951"
+	},
+	"item": [
+		{
+			"name": "CountryList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"StatusCodeTest\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response have Russia\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Russia\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{api_key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dataservice.accuweather.com/locations/v1/countries/EUR",
+					"protocol": "http",
+					"host": [
+						"dataservice",
+						"accuweather",
+						"com"
+					],
+					"path": [
+						"locations",
+						"v1",
+						"countries",
+						"EUR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchCity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{api_key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dataservice.accuweather.com/locations/v1/cities/search?q=Moscow",
+					"protocol": "http",
+					"host": [
+						"dataservice",
+						"accuweather",
+						"com"
+					],
+					"path": [
+						"locations",
+						"v1",
+						"cities",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Moscow"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
