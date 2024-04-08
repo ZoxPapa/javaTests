@@ -9,18 +9,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.restassured.RestAssured.given;
 
-public class SearchTest {
-    String apiKey = "7cq8BUg4Ge8m1oDEmev8kugwuSIvmAV4";
-    String baseUrl = "http://dataservice.accuweather.com/";
+public class SearchTest extends  AbstractWeatherTest{
+//    String apiKey = "7cq8BUg4Ge8m1oDEmev8kugwuSIvmAV4";
+//    String baseUrl = "http://dataservice.accuweather.com/";
 
     @ParameterizedTest
     @ValueSource(strings = {"Moscow", "Volgograd"})
     void searchRussiansCity(String s){
         List<AdministrativeArea> myList = given()
                 .queryParam("q",s)
-                .queryParam("apikey", apiKey)
+                .queryParam("apikey", getApiKey())
                 .when()
-                .get(baseUrl+"locations/v1/cities/search")
+                .get(getBaseUrl()+"locations/v1/cities/search")
                 .then()
                 .statusCode(200)
                 .extract()
@@ -38,9 +38,9 @@ public class SearchTest {
     void searchEUCityRegions(String s){
         List<AdministrativeArea> myList = given()
                 .queryParam("q",s)
-                .queryParam("apikey", apiKey)
+                .queryParam("apikey", getApiKey())
                 .when()
-                .get(baseUrl+"locations/v1/cities/search")
+                .get(getBaseUrl()+"locations/v1/cities/search")
                 .then()
                 .statusCode(200)
                 .extract()
